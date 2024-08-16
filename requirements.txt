@@ -1,0 +1,4 @@
+sqlalchemy
+pytest
+mysqlclient
+pandas
