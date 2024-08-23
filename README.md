@@ -13,7 +13,7 @@ Table of Contents
 ## Installation
 To get started, clone the repository and install the necessary dependencies:
 ```bash
-git clone https://github.com/mdelhoyo-launch/python-dbtesting.git
+git clone https://github.com/LaunchCG/python-SQLAlchemyAccelerator.git
 cd your-repo-name
 pip install -r requirements.txt
 ```
