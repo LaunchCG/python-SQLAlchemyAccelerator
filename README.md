@@ -1,4 +1,4 @@
-# python-dbtesting
+# SQLAlchemy Accelerator
 Python automated scripts for database testing
 
 This project demonstrates how to use SQLAlchemy to interact with a MySQL database and how to write automated tests using pytest. It includes examples for schema validation, query performance analysis and data consistency checks.
@@ -25,10 +25,11 @@ SQLAlchemy
 mysqlclient
 pytest
 pandas
+pytest-html
 ```
 
 ## Project Structure
-The project is organized as follows:
+The project is organized as shown above:
 ```bash
 src/
 │
@@ -41,19 +42,22 @@ src/
 │   ├── test_performance.py  # Tests for query performance
 │   ├── test_consistency.py  # Tests for data consistency
 │
-└── requirements.txt         # List of dependencies
+├── .env                     # Environment variables for sensitive information.
+├── pytest.ini               # Configuration file for pytest
+├── requirements.txt         # List of dependencies
+└── README.md                # Project documentation
 ```
 
 ## Database Configuration
-The database connection is configured in the **database/db.py** file. Update the **DATABASE_URL** with your MySQL credentials as follows.
+The database connection is configured in the **src/database/db.py** file. Update the environment variables in the **.env** file with your MySQL credentials as shown above.
 
 ## Database connection configuration
 ```python
-DATABASE_URL = 'mysql://username:password@localhost/mydatabase' #example
-
-engine = create_engine(DATABASE_URL)
+DATABASE_USER = os.getenv('DATABASE_USER', 'root')
+DATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD', 'root')
+DATABASE_HOST = os.getenv('DATABASE_HOST', 'localhost')
+DATABASE_NAME = os.getenv('DATABASE_NAME', 'pytest_workshop')
 ```
-
 
 ## Running the Tests
 To run the tests, simply execute:
