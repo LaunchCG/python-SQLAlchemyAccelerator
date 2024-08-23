@@ -2,3 +2,4 @@ sqlalchemy
 pytest
 mysqlclient
 pandas
+pytest-html
