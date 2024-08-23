@@ -1,7 +1,6 @@
 from sqlalchemy import inspect
-from tests.conftest import db
 
-# Constants
+# Constants for expected tables and columns
 TABLES = {
     'consultant': [
         'consultant_discipline', 
@@ -22,10 +21,14 @@ TABLES = {
     # New tables and columns can be added here
 }
 
+# Function to validate tables and columns
 def test_validate_tables_and_columns(db):
+    """
+    Validate that the expected tables and columns exist in the database schema.
 
-    print(type(db))
-
+    Args:
+    db: Database connection object.
+    """
     inspector = inspect(db)
     tables = inspector.get_table_names()
 

@@ -1,11 +1,32 @@
 from sqlalchemy import create_engine
+import os
 
-DATABASE_URI = 'mysql://root:root@localhost/pytest_workshop'
+# Load database credentials from environment variables (recommended for security)
+DATABASE_USER = os.getenv('DATABASE_USER', 'root')
+DATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD', 'root')
+DATABASE_HOST = os.getenv('DATABASE_HOST', 'localhost')
+DATABASE_NAME = os.getenv('DATABASE_NAME', 'pytest_workshop')
 
-engine = create_engine(DATABASE_URI)
+# Construct the database URI
+DATABASE_URI = f'mysql://{DATABASE_USER}:{DATABASE_PASSWORD}@{DATABASE_HOST}/{DATABASE_NAME}'
 
-# in case we integrate ORM
+# Create the SQLAlchemy engine
+engine = create_engine(DATABASE_URI, pool_pre_ping=True)
+
+# Optional: ORM session integration
+# from sqlalchemy.orm import sessionmaker
 # SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 def get_connection():
-    return engine.connect()
+    """
+    Establish and return a database connection.
+
+    Returns:
+        connection: A SQLAlchemy connection object.
+    """
+    try:
+        connection = engine.connect()
+        return connection
+    except Exception as e:
+        print(f"Error connecting to the database: {e}")
+        raise
